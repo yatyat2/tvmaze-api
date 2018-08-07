@@ -26,6 +26,7 @@ class Card extends React.Component {
           {`
             .card-form {
               border-bottom: 1px dotted grey;
+              padding: 15px;
             }
             .content {
               display: none;
@@ -34,6 +35,7 @@ class Card extends React.Component {
             .active-content {
               color: red;
               border-bottom: 1px dotted grey;
+              padding: 15px;
             }
           `}
         </style>
