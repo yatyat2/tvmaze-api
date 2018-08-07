@@ -1,6 +1,12 @@
+import Search from "../components/search";
+
 class Index extends React.Component {
   render() {
-    return <div>asd</div>;
+    return (
+      <div>
+        <Search />
+      </div>
+    );
   }
 }
 
