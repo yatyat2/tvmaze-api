@@ -1,7 +1,18 @@
 class Search extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <form className="search-form">
+      <form
+        onSubmit={event => {
+          event.preventDefault();
+          this.props.onSubmit(this.refs.search.value);
+          this.props.handleFetch();
+        }}
+        className="search-form"
+      >
         <input
           ref="search"
           type="text"

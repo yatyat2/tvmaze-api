@@ -20,9 +20,10 @@ class Card extends React.Component {
           {this.props.showname}
         </div>
         <div className={this.state.activeState ? "active-content" : "content"}>
-          {this.props.showgenres.map(genres => {
+          {/* {this.props.showgenres.map(genres => {
             return <li>{genres}</li>;
-          })}
+          })} */}
+          {this.props.showgenres}
         </div>
         <style jsx>
           {`
