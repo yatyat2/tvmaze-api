@@ -17,10 +17,12 @@ class Card extends React.Component {
             });
           }}
         >
-          프로그램 이름입니다.
+          {this.props.showname}
         </div>
         <div className={this.state.activeState ? "active-content" : "content"}>
-          프로그램 내용입니다.
+          {this.props.showgenres.map(genres => {
+            return <li>{genres}</li>;
+          })}
         </div>
         <style jsx>
           {`
