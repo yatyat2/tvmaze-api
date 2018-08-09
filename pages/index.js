@@ -6,7 +6,8 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      datas: ""
+      datas: "",
+      keyNumber: 0
     };
   }
 
@@ -20,7 +21,7 @@ class Index extends React.Component {
           {this.state.datas &&
             this.state.datas.map((show, index) => (
               <Card
-                key={index}
+                key={this.state.keyNumber++}
                 showname={show.show.name}
                 showgenres={show.show.genres}
               />
