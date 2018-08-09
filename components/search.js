@@ -1,7 +1,17 @@
 class Search extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <form className="search-form">
+      <form
+        onSubmit={event => {
+          event.preventDefault();
+          this.props.onSubmit(this.refs.search.value);
+        }}
+        className="search-form"
+      >
         <input
           ref="search"
           type="text"
@@ -22,6 +32,7 @@ class Search extends React.Component {
             decoration: none;
             outline: 0;
           }
+
           .search-buuton {
             color: white;
             background-color: orange;

@@ -2,11 +2,19 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeState: false
+      activeState: false,
+      test: []
     };
   }
 
   render() {
+    let nogenre = null;
+    if (this.props.showgenres.length == 0) {
+      nogenre = "No Genre";
+    } else {
+      nogenre = null;
+    }
+
     return (
       <div>
         <div
@@ -20,9 +28,11 @@ class Card extends React.Component {
           {this.props.showname}
         </div>
         <div className={this.state.activeState ? "active-content" : "content"}>
-          {this.props.showgenres.map(genres => {
-            return <li>{genres}</li>;
-          })}
+          {this.props.showgenres &&
+            this.props.showgenres.map(step => {
+              return <li>{step}</li>;
+            })}
+          {nogenre && <li>{nogenre}</li>}
         </div>
         <style jsx>
           {`

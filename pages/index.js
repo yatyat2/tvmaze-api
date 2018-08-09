@@ -6,22 +6,54 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: "batman"
+      shows: "",
+      searchText: "",
+      isfetch: false,
+      keynumber: 0
     };
   }
 
+  handlesubmit = async changeText => {
+    await this.setState({
+      searchText: changeText
+    });
+
+    const res = await fetch(
+      `https://api.tvmaze.com/search/shows?q=${this.state.searchText}`
+    );
+
+    const data = await res.json();
+
+    console.log(`show data fetch:${data[0].show.name}`);
+
+    await this.setState({
+      shows: data
+    });
+  };
+
   render() {
+    const { searchText } = this.state;
+
     return (
       <div>
         <div className="search-div">
-          <Search />
+          <Search
+            onSubmit={searchText => {
+              this.handlesubmit(searchText);
+            }}
+          />
         </div>
         <div className="card-div">
-          {this.props.shows.map(show => {
-            return (
-              <Card showname={show.show.name} showgenres={show.show.genres} />
-            );
-          })}
+          {this.state.shows &&
+            this.state.shows.map(step => {
+              return (
+                <Card
+                  key={this.state.keynumber++}
+                  showname={step.show.name}
+                  showgenres={step.show.genres}
+                />
+              );
+            })}
         </div>
 
         <style jsx>
@@ -44,15 +76,5 @@ class Index extends React.Component {
     );
   }
 }
-
-Index.getInitialProps = async function() {
-  const res = await fetch(`https://api.tvmaze.com/search/shows?q=batman`);
-  const data = await res.json();
-
-  console.log(`show data fetch Count:${data.name}`);
-  return {
-    shows: data
-  };
-};
 
 export default Index;
