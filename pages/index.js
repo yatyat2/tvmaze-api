@@ -6,8 +6,7 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      datas: "",
-      searchText: ""
+      datas: ""
     };
   }
 
@@ -51,19 +50,15 @@ class Index extends React.Component {
   }
 
   handleSubmit = async searchText => {
-    await this.setState({
-      searchText
-    });
-
     const res = await fetch(
-      `https://api.tvmaze.com/search/shows?q=${this.state.searchText}`
+      `https://api.tvmaze.com/search/shows?q=${searchText}`
     );
 
     const data = await res.json();
 
     console.log(`show data fetch:${data[0].show.name}`);
 
-    await this.setState({
+    this.setState({
       datas: data
     });
   };
