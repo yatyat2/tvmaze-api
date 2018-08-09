@@ -5,13 +5,7 @@ class Search extends React.Component {
 
   render() {
     return (
-      <form
-        onSubmit={event => {
-          event.preventDefault();
-          this.props.onSubmit(this.refs.search.value);
-        }}
-        className="search-form"
-      >
+      <form onSubmit={this.handleSubmit} className="search-form">
         <input
           ref="search"
           type="text"
@@ -43,6 +37,11 @@ class Search extends React.Component {
       </form>
     );
   }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.onSubmit(this.refs.search.value);
+  };
 }
 
 export default Search;
