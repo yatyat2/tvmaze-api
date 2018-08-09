@@ -50,9 +50,9 @@ class Index extends React.Component {
     );
   }
 
-  handlesubmit = async changeText => {
+  handleSubmit = async searchText => {
     await this.setState({
-      searchText: changeText
+      searchText
     });
 
     const res = await fetch(
@@ -66,10 +66,6 @@ class Index extends React.Component {
     await this.setState({
       datas: data
     });
-  };
-
-  handleSubmit = searchText => {
-    this.handlesubmit(searchText);
   };
 }
 
