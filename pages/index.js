@@ -8,7 +8,6 @@ class Index extends React.Component {
     this.state = {
       shows: "",
       searchText: "",
-      isfetch: false,
       keynumber: 0
     };
   }
@@ -32,8 +31,6 @@ class Index extends React.Component {
   };
 
   render() {
-    const { searchText } = this.state;
-
     return (
       <div>
         <div className="search-div">
