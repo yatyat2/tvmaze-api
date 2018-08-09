@@ -6,54 +6,25 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      shows: "",
-      searchText: "",
-      isfetch: false,
-      keynumber: 0
+      datas: ""
     };
   }
 
-  handlesubmit = async changeText => {
-    await this.setState({
-      searchText: changeText
-    });
-
-    const res = await fetch(
-      `https://api.tvmaze.com/search/shows?q=${this.state.searchText}`
-    );
-
-    const data = await res.json();
-
-    console.log(`show data fetch:${data[0].show.name}`);
-
-    await this.setState({
-      shows: data
-    });
-  };
-
   render() {
-    const { searchText } = this.state;
-
     return (
       <div>
         <div className="search-div">
-          <Search
-            onSubmit={searchText => {
-              this.handlesubmit(searchText);
-            }}
-          />
+          <Search onSubmit={this.handleSubmit} />
         </div>
         <div className="card-div">
-          {this.state.shows &&
-            this.state.shows.map(step => {
-              return (
-                <Card
-                  key={this.state.keynumber++}
-                  showname={step.show.name}
-                  showgenres={step.show.genres}
-                />
-              );
-            })}
+          {this.state.datas &&
+            this.state.datas.map((show, index) => (
+              <Card
+                key={index}
+                showname={show.show.name}
+                showgenres={show.show.genres}
+              />
+            ))}
         </div>
 
         <style jsx>
@@ -75,6 +46,20 @@ class Index extends React.Component {
       </div>
     );
   }
+
+  handleSubmit = async searchText => {
+    const res = await fetch(
+      `https://api.tvmaze.com/search/shows?q=${searchText}`
+    );
+
+    const data = await res.json();
+
+    console.log(`show data fetch:${data[0].show.name}`);
+
+    this.setState({
+      datas: data
+    });
+  };
 }
 
 export default Index;
