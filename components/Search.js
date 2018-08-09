@@ -1,16 +1,20 @@
 class Search extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      searchKeyword: ""
+    };
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit} className="search-form">
         <input
-          ref="search"
           type="text"
           className="search-window"
           placeholder="프로그램 이름"
+          onChange={this.handleChangeSearchKeyword}
+          value={this.state.searchKeyword}
         />
         <button type="submit" className="search-buuton">
           검색
@@ -40,7 +44,11 @@ class Search extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(this.refs.search.value);
+    this.props.onSubmit(this.state.searchKeyword);
+  };
+
+  handleChangeSearchKeyword = event => {
+    this.setState({ searchKeyword: event.currentTarget.value });
   };
 }
 
