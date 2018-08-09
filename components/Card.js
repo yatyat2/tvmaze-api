@@ -22,8 +22,8 @@ class Card extends React.Component {
         </div>
         <div className={this.state.isOpen ? "active-content" : "content"}>
           {this.props.showgenres && this.props.showgenres.length > 0 ? (
-            this.props.showgenres.map(genre => {
-              return <li>{genre}</li>;
+            this.props.showgenres.map((genre, index) => {
+              return <li key={index}>{genre}</li>;
             })
           ) : (
             <li>No Genre</li>

@@ -25,7 +25,7 @@ class Index extends React.Component {
     console.log(`show data fetch:${data[0].show.name}`);
 
     await this.setState({
-      shows: data
+      datas: data
     });
   };
 
