@@ -2,7 +2,7 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeState: false,
+      isOpen: false,
       test: []
     };
   }
@@ -14,13 +14,13 @@ class Card extends React.Component {
           className="card-form"
           onClick={() => {
             this.setState({
-              activeState: !this.state.activeState
+              activeState: !this.state.isOpen
             });
           }}
         >
           {this.props.showname}
         </div>
-        <div className={this.state.activeState ? "active-content" : "content"}>
+        <div className={this.state.isOpen ? "active-content" : "content"}>
           {this.props.showgenres && this.props.showgenres.length > 0 ? (
             this.props.showgenres.map(step => {
               return <li>{step}</li>;
