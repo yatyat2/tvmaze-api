@@ -11,33 +11,11 @@ class Index extends React.Component {
     };
   }
 
-  handlesubmit = async changeText => {
-    await this.setState({
-      searchText: changeText
-    });
-
-    const res = await fetch(
-      `https://api.tvmaze.com/search/shows?q=${this.state.searchText}`
-    );
-
-    const data = await res.json();
-
-    console.log(`show data fetch:${data[0].show.name}`);
-
-    await this.setState({
-      datas: data
-    });
-  };
-
   render() {
     return (
       <div>
         <div className="search-div">
-          <Search
-            onSubmit={searchText => {
-              this.handlesubmit(searchText);
-            }}
-          />
+          <Search onSubmit={this.handleSubmit} />
         </div>
         <div className="card-div">
           {this.state.datas &&
@@ -71,6 +49,28 @@ class Index extends React.Component {
       </div>
     );
   }
+
+  handlesubmit = async changeText => {
+    await this.setState({
+      searchText: changeText
+    });
+
+    const res = await fetch(
+      `https://api.tvmaze.com/search/shows?q=${this.state.searchText}`
+    );
+
+    const data = await res.json();
+
+    console.log(`show data fetch:${data[0].show.name}`);
+
+    await this.setState({
+      datas: data
+    });
+  };
+
+  handleSubmit = searchText => {
+    this.handlesubmit(searchText);
+  };
 }
 
 export default Index;
