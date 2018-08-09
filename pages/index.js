@@ -6,7 +6,7 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      shows: "",
+      datas: "",
       searchText: ""
     };
   }
@@ -40,13 +40,13 @@ class Index extends React.Component {
           />
         </div>
         <div className="card-div">
-          {this.state.shows &&
-            this.state.shows.map((step, index) => {
+          {this.state.datas &&
+            this.state.datas.map((show, index) => {
               return (
                 <Card
                   key={index}
-                  showname={step.show.name}
-                  showgenres={step.show.genres}
+                  showname={show.show.name}
+                  showgenres={show.show.genres}
                 />
               );
             })}
