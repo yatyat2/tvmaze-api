@@ -9,7 +9,6 @@ class Search extends React.Component {
         onSubmit={event => {
           event.preventDefault();
           this.props.onSubmit(this.refs.search.value);
-          this.props.handleFetch();
         }}
         className="search-form"
       >
@@ -33,6 +32,7 @@ class Search extends React.Component {
             decoration: none;
             outline: 0;
           }
+
           .search-buuton {
             color: white;
             background-color: orange;
