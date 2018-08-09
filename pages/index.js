@@ -18,15 +18,13 @@ class Index extends React.Component {
         </div>
         <div className="card-div">
           {this.state.datas &&
-            this.state.datas.map((show, index) => {
-              return (
-                <Card
-                  key={index}
-                  showname={show.show.name}
-                  showgenres={show.show.genres}
-                />
-              );
-            })}
+            this.state.datas.map((show, index) => (
+              <Card
+                key={index}
+                showname={show.show.name}
+                showgenres={show.show.genres}
+              />
+            ))}
         </div>
 
         <style jsx>
