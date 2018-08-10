@@ -14,7 +14,7 @@ class Card extends React.Component {
           className="card-form"
           onClick={() => {
             this.setState({
-              activeState: !this.state.isOpen
+              isOpen: !this.state.isOpen
             });
           }}
         >
