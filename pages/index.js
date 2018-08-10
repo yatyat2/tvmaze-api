@@ -7,6 +7,9 @@ import { observer } from "mobx-react";
 class Index extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isAllFetch: false
+    };
   }
 
   render() {
@@ -17,8 +20,8 @@ class Index extends React.Component {
         </div>
         <div className="card-div">
           {store.shows.size > 0 &&
+            this.state.isAllFetch &&
             Array.from(store.shows.values()).map((step, index) => {
-              console.log(Array.from(step.genre));
               return (
                 <Card
                   key={index}
@@ -50,6 +53,10 @@ class Index extends React.Component {
   }
 
   handleSubmit = async searchText => {
+    await this.setState({
+      isAllFetch: false
+    });
+
     const res = await fetch(
       `https://api.tvmaze.com/search/shows?q=${searchText}`
     );
@@ -57,6 +64,10 @@ class Index extends React.Component {
 
     await data.map((showInfo, index) => {
       store.addShowInfo(`${index}`, showInfo.show.name, showInfo.show.genres);
+    });
+
+    await this.setState({
+      isAllFetch: true
     });
   };
 }
