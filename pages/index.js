@@ -19,8 +19,9 @@ class Index extends React.Component {
           <Search onSubmit={this.handleSubmit} />
         </div>
         <div className="card-div">
-          {store.shows.size > 0 &&
-            this.state.isAllFetch &&
+          {!this.state.isAllFetch &&
+            store.shows.size > 0 && <div className="loading-state">로딩중</div>}
+          {this.state.isAllFetch &&
             Array.from(store.shows.values()).map((step, index) => {
               return (
                 <Card
@@ -38,6 +39,11 @@ class Index extends React.Component {
               display: flex;
               justify-content: center;
               margin-top: 200px;
+            }
+
+            .loading-state {
+              text-align: center;
+              color: red;
             }
 
             .card-div {
