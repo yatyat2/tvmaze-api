@@ -1,13 +1,14 @@
 import Search from "../components/Search";
 import Card from "../components/Card";
 import fetch from "isomorphic-unfetch";
+import store from "../Store";
+import { observer } from "mobx-react";
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      datas: "",
-      keyNumber: 0
+      isAllFetch: false
     };
   }
 
@@ -18,14 +19,17 @@ class Index extends React.Component {
           <Search onSubmit={this.handleSubmit} />
         </div>
         <div className="card-div">
-          {this.state.datas &&
-            this.state.datas.map((show, index) => (
-              <Card
-                key={this.state.keyNumber++}
-                showname={show.show.name}
-                showgenres={show.show.genres}
-              />
-            ))}
+          {store.shows.size > 0 &&
+            this.state.isAllFetch &&
+            Array.from(store.shows.values()).map((step, index) => {
+              return (
+                <Card
+                  key={index}
+                  showname={step.name}
+                  showgenres={Array.from(step.genre)}
+                />
+              );
+            })}
         </div>
 
         <style jsx>
@@ -49,18 +53,23 @@ class Index extends React.Component {
   }
 
   handleSubmit = async searchText => {
+    await this.setState({
+      isAllFetch: false
+    });
+
     const res = await fetch(
       `https://api.tvmaze.com/search/shows?q=${searchText}`
     );
-
     const data = await res.json();
 
-    console.log(`show data fetch:${data[0].show.name}`);
+    await data.map((showInfo, index) => {
+      store.addShowInfo(`${index}`, showInfo.show.name, showInfo.show.genres);
+    });
 
-    this.setState({
-      datas: data
+    await this.setState({
+      isAllFetch: true
     });
   };
 }
 
-export default Index;
+export default observer(Index);
