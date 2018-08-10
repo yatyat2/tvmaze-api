@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 const ShowInfo = types
   .model({
     name: "",
-    genre: ""
+    genre: types.array(types.string)
   })
   .actions(self => {
     function setInfo(newName, newgenre) {

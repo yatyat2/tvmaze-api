@@ -18,8 +18,13 @@ class Index extends React.Component {
         <div className="card-div">
           {store.shows.size > 0 &&
             Array.from(store.shows.values()).map((step, index) => {
+              console.log(Array.from(step.genre));
               return (
-                <Card key={index} showname={step.name} showgenre={step.genre} />
+                <Card
+                  key={index}
+                  showname={step.name}
+                  showgenres={Array.from(step.genre)}
+                />
               );
             })}
         </div>
@@ -51,11 +56,7 @@ class Index extends React.Component {
     const data = await res.json();
 
     await data.map((showInfo, index) => {
-      store.addShowInfo(
-        `${index}`,
-        showInfo.show.name,
-        showInfo.show.genres[0]
-      );
+      store.addShowInfo(`${index}`, showInfo.show.name, showInfo.show.genres);
     });
   };
 }
